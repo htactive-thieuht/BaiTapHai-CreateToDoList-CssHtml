@@ -1,0 +1,497 @@
+  <!-- create model -->
+            <!-- <button onclick="showModal(true)">oke</button>
+           <div id="modal" style="width:80%;height: 70%; position: absolute;background:red ;display: none;top: 10%;right: 10%;">
+            <button onclick="showModal(false)">close</button>
+           </div>    -->
+
+            // function showModal(isShow) {
+            // $("#modal").style.display='block';
+            // if(isShow){
+            //     document.getElementById('modal').style.display='flex';
+            // }else{
+            //     document.getElementById('modal').style.display='none';
+            // }
+            // }
+
+
+
+
+            <!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Demo Trello</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-image: url("../image/hinh6.JPG");
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+        .content {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+            font-size: 14px;
+            display: grid;
+            grid-template-rows: max-content auto;
+            grid-gap: 10px;
+            height: 100%;
+            padding: 5px;
+        }
+
+        .button {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .first-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+        }
+
+        .first-header .left-aligned {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            grid-gap: 5px;
+            justify-self: flex-start;
+        }
+
+        .first-header .right-aligned {
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            grid-gap: 5px;
+            justify-self: flex-start;
+        }
+
+        .first-header .logo {
+            background-color: rgba(255, 255, 255, 0.3);
+            justify-self: center;
+        }
+
+        .first-header .right-aligned {
+            justify-self: flex-end;
+        }
+
+        .second-header {
+            color: black;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .board-header-text {
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        .second-header .left {
+            display: grid;
+            grid-template-columns: repeat(4, max-content);
+            grid-gap: 10px;
+            justify-self: left;
+        }
+
+        .second-header .right {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            grid-gap: 10px;
+            justify-self: right;
+        }
+
+        .list {
+            padding-top: 10px;
+            display: grid;
+            grid-auto-columns: 272px;
+            grid-auto-flow: column;
+            grid-gap: 8px;
+            overflow: auto;
+        }
+
+        .columm-list {
+            background-color: rgb(235, 236, 240);
+            border-radius: 3px;
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-gap: 10px;
+            height: max-content;
+            padding: 10px;
+
+        }
+      
+
+        .list-title {
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 9fr 1fr;
+        }
+
+        .add-card {
+            display: grid;
+            grid-template-columns: 9fr 1fr;
+            padding-top: 10px;
+            padding-bottom: 5px;
+        }
+
+        .add :active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.055);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .myInput {
+            display: none;
+        }
+        .model{
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+            padding: 10px;
+            display: grid;
+            width: 50%;
+            grid-template-columns: 5fr 1fr;
+        }
+        .model-left{
+            border-radius: 3px;
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-gap: 10px;
+            height: max-content;
+            padding: 10px;
+
+        }
+       
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class=" first-header">
+                <div class="left-aligned">
+                    <div class="button">Home</div>
+                    <div class="button">Boards</div>
+                    <div class="button">Search bar</div>
+                </div>
+                <div class="logo button">
+                    Logo
+                </div>
+                <div class="right-aligned">
+                    <div class="button">Add</div>
+                    <div class="button">Info</div>
+                    <div class="button">Bell</div>
+                    <div class="button">Gear</div>
+                    <div class="button">Avatar</div>
+                </div>
+            </div>
+           
+            <div>
+                <div class="second-header">
+                    <div class="left">
+                        <div class="board-header-text">Board Title</div>
+                        <div class="button">Star</div>
+                        <div class="button">Personal</div>
+                        <div class="button">Private</div>
+                    </div>
+                    <div class="right">
+                        <div class="button">Show menu</div>
+                        <div class="button">Butler</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="columm-list" id="columm-list">
+                        <div class="list-title">
+                            List title 1
+                        </div>
+                        <div class="columm-list" id="listCard1">
+                            <div class="card" id="card">
+                                <div class="title-name" id="Card-model1" onclick="showModal(1, 'Card1', 'Thieu Ho Thi')">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="title-name"  id="Card-model2" onclick="showModal(2, 'Card2', 'lnkshdjs')">
+                                    Card 2
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput1" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(1)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columm-list">
+                        <div class="list-title">
+                            List title 2
+                        </div>
+                        <div class="columm-list" id="listCard2">
+                            <div class="card" id="card">
+                                <div class="title-name" id="modal3" onclick="showModal(1, 'Card1', 'Thieu Ho Thi')">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="title-name" id="modal4" onclick="showModal(1, 'Card1', 'Thieu Ho Thi')">
+                                    Card 2
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput2" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(2)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columm-list">
+                        <div class="list-title">
+                            List title 3
+                        </div>
+                        <div class="columm-list" id="listCard3">
+                            <div class="card" id="card">
+                                <div class="title-name" id="modal5" onclick="showModal(1, 'Card1', 'Thieu Ho Thi')">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="title-name" id="modal6" onclick="showModal(1, 'Card1', 'Thieu Ho Thi')">
+                                    Card 2
+                                </div>
+                                <div class="button-delete">
+                                    <i class="fa fa-pencil" onclick="updateElement()" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput3" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(3)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- create model -->
+            <div class="modal" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitle"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="bodyModal">
+
+                        <p><strong>Description</strong></p>
+                        <input id="myInput1" class="myinput">
+                        <p><strong>Activity</strong></p>
+                        <input id="myInput1" class="myinput">
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="saveTextModal()">Save changes</button>
+                      <button type="button"  onclick="modalDeleteData()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    </div>
+   
+    <script>
+        
+        function newElement(index) {
+            document.getElementById(`myInput${index}`).style.display = "block";
+            var getIputValue = document.getElementById(`myInput${index}`).value;// myInput tên các id có cùng ký tự đầu là myInput .${index} là kí tự cuối khác nhau
+            if (getIputValue == "") {
+                alert("no text, please insert text ")
+            }
+            else {
+                var titleName = document.createElement("div");
+                titleName.className = "title-name"
+                titleName.innerHTML = getIputValue;
+
+                var btnUpdate = document.createElement("div");
+                btnUpdate.className = "button-update"
+                var buttonUpdate = document.createElement("i");
+                buttonUpdate.setAttribute("onclick", "updateElement()")
+                buttonUpdate.className = "fa fa-pencil"
+                btnUpdate.appendChild(buttonUpdate);
+
+                var card = document.createElement("div");
+                card.className = "card"
+                //card.id = ""
+                card.appendChild(titleName)
+                card.appendChild(btnUpdate)
+                document.getElementById(`listCard${index}`).appendChild(card);
+                card.setAttribute("onclick", "showModal()")
+                var nam = "";
+                document.getElementById(`myInput${index}`).value = nam;
+                document.getElementById(`myInput${index}`).style.display = "none";
+            }
+        }
+        function showModal(index, name, desc) {
+            document.getElementById(`Card-model${index}`).setAttribute("data-toggle", "modal");//mở modal khi nhấn vào id có tên với kí tự đầu là Card-model
+            document.getElementById(`Card-model${index}`).setAttribute("data-target", "#myModal");
+            // var title =  document.getElementById("modalTitle").innerText;
+            // document.getElementById("modalTitle").innerHTML = `${name} ${title}`
+
+
+            // var body =  document.getElementById("bodyModal").innerText;/// lấy text từ modal
+            // document.getElementById("bodyModal").innerHTML = `${desc} ${body}`;//gán text từ card và cộng text từ modal
+           
+        }
+
+        // function modalDeleteData(){
+        //     var namatitlemodal = "";
+        //     document.getElementById(`modalTitle`).innerText = namatitlemodal;
+        //     var namatitlemodal = "";
+        //     document.getElementById(`bodyModal`).innerText= namatitlemodal;
+
+        // }
+
+        // function saveTextModal(){
+        //     var tileModal= document.getElementById("modalTitle").innerText;
+        //     if(tileModal==""){
+        //         alert("no text, please insert text ")
+        //     }
+        //     else {
+        //         var titleCard = document.getElementById("Card-model1").innerText;
+        //         document.getElementById("Card-model1").innerHTML=titleCard;
+        //     }
+
+        // }
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+<script type="text/javascript">
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        //get value from #myPopupInput and set the value to #myMainPageInput
+        $('#myModal').on('hidden.bs.modal', function (e) {
+    var value = $('#myPopupInput').val();
+    $('#myMainPageInput').val(value);
+});
+    })
+</script>
+
+<a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">open popup</a>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                input in popup:
+                <input type="text" class="form-control" id="myPopupInput" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close (do nothing)</button>
+                <button type="button" class="btn btn-primary">Save changes (but popup does not even close)</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+input in main page: 
+<input type="text" class="form-control" id="myMainPageInput" />
+
+
+
+
+
+
+// function modalDeleteData(){
+        //     var namatitlemodal = "";
+        //     document.getElementById(`modalTitle`).innerText = namatitlemodal;
+        //     var namatitlemodal = "";
+        //     document.getElementById(`bodyModal`).innerText= namatitlemodal;
+
+        // }
+
+        // function saveTextModal(index){
+        //         var getDescriptionIputValue = document.getElementById(`myInputModal${index}`).value;
+        //         var getActivityIputValue = document.getElementById(`myInputModal${index}`).value;
+        //     if(description=="" || activity==""){
+        //         alert("no text, please insert text ")
+        //     }
+        //     else {
+               
+        //         var divDescriptionIputValue = document.createElement("div");
+        //         divDescriptionIputValue.className="descript";
+        //         titleName.innerHTML = getDescriptionIputValue;
+        //         var divActivityIputValue = document.createElement("div");
+        //         divActivityIputValue.className="activity" ;
+        //         titleName.innerHTML = getActivityIputValue;
+        //         document.getElementById(`card${index}`).appendChild(divDescriptionIputValue);
+        //         document.getElementById(`card${index}`).appendChild(divActivityIputValue);
+        //     }
+
+//             $('#myModal').on('hidden.bs.modal', function (e) {
+//         //get value from #myPopupInput and set the value to #myMainPageInput
+//         $('#myModal').on('hidden.bs.modal', function (e) {
+//     var value = $('#myPopupInput').val();
+//     $('#myMainPageInput').val(value);
+// });
+//     })
+
+
+        // }
+
+
+        

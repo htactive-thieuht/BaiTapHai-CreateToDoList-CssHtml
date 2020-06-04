@@ -1,0 +1,53 @@
+ // function newElement(index) {
+        //     document.getElementById(`myInput${index}`).style.display = "block";
+        //     var getIputValue = document.getElementById(`myInput${index}`).value;// myInput tên các id có cùng ký tự đầu là myInput .${index} là kí tự cuối khác nhau
+        //     if (getIputValue == "") {
+        //         alert("no text, please insert text ")
+        //     }
+        //     else {
+        //         var titleName = document.createElement("div");
+        //         titleName.className = "title-name"
+        //         titleName.innerHTML = getIputValue;
+        //         var btnUpdate = document.createElement("div");
+        //         btnUpdate.className = "button-update"
+        //         var buttonUpdate = document.createElement("i");
+        //         buttonUpdate.setAttribute("onclick", "updateElement()")
+        //         buttonUpdate.className = "fa fa-pencil"
+        //         btnUpdate.appendChild(buttonUpdate);
+        //         const mycardCount = document.getElementById(`listCard${index}`).childElementCount;
+        //         titleName.setAttribute("onclick", `showModal(${index},${mycardCount +1})`);
+        //         titleName.setAttribute("id", `myLI${myULCount + 1}`);
+        //         var card = document.createElement("div");
+        //         card.className = "card"
+        //         card.id = ""
+        //         card.appendChild(titleName)
+        //         card.appendChild(btnUpdate)
+        //         document.getElementById(`listCard${index}`).appendChild(card);
+        //        // card.setAttribute("onclick", "showModal()")
+        //         var nam = "";
+        //         document.getElementById(`myInput${index}`).value = nam;
+        //         document.getElementById(`myInput${index}`).style.display = "none";
+        //     }
+        // }
+
+ 
+ 
+ 
+ 
+ 
+ addtask = (id) => {
+        const myULCount = document.getElementById(`myUL${id}`).childElementCount;
+        var valueInput = document.getElementById(`tsk${id}`).value
+        var li = document.createElement("li");
+        li.setAttribute("onclick", `showModal(${id},${myULCount +1})`);
+        li.setAttribute("id", `myLI${myULCount + 1}`);
+        li.innerHTML = valueInput;
+        if (valueInput == "") {
+            alert("You must write in box");
+        } else {
+            document.getElementById(`myUL${id}`).appendChild(li);
+            document.getElementById(`tsk${id}`).value = "";
+            document.getElementById(`addTask${id}`).style.display = "none";
+            document.getElementById(`addCardId${id}`).style.display = "block";
+        }
+        }

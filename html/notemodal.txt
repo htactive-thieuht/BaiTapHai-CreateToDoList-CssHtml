@@ -1,53 +1,452 @@
- // function newElement(index) {
-        //     document.getElementById(`myInput${index}`).style.display = "block";
-        //     var getIputValue = document.getElementById(`myInput${index}`).value;// myInput tên các id có cùng ký tự đầu là myInput .${index} là kí tự cuối khác nhau
-        //     if (getIputValue == "") {
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Demo Trello</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-image: url("../image/hinh6.JPG");
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+        .content {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+            font-size: 14px;
+            display: grid;
+            grid-template-rows: max-content auto;
+            grid-gap: 10px;
+            height: 100%;
+            padding: 5px;
+        }
+
+        .button {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .first-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+        }
+
+        .first-header .left-aligned {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            grid-gap: 5px;
+            justify-self: flex-start;
+        }
+
+        .first-header .right-aligned {
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            grid-gap: 5px;
+            justify-self: flex-start;
+        }
+
+        .first-header .logo {
+            background-color: rgba(255, 255, 255, 0.3);
+            justify-self: center;
+        }
+
+        .first-header .right-aligned {
+            justify-self: flex-end;
+        }
+
+        .second-header {
+            color: black;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .board-header-text {
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        .second-header .left {
+            display: grid;
+            grid-template-columns: repeat(4, max-content);
+            grid-gap: 10px;
+            justify-self: left;
+        }
+
+        .second-header .right {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            grid-gap: 10px;
+            justify-self: right;
+        }
+
+        .list {
+            padding-top: 10px;
+            display: grid;
+            grid-auto-columns: 272px;
+            grid-auto-flow: column;
+            grid-gap: 8px;
+            overflow: auto;
+        }
+
+        .columm-list {
+            background-color: rgb(235, 236, 240);
+            border-radius: 3px;
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-gap: 10px;
+            height: max-content;
+            padding: 10px;
+
+        }
+
+
+        .list-title {
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 9fr 1fr;
+        }
+
+        .add-card {
+            display: grid;
+            grid-template-columns: 9fr 1fr;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .add :active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.055);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .myInput {
+            display: none;
+        }
+
+        .model {
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
+            padding: 10px;
+            display: grid;
+            width: 50%;
+            grid-template-columns: 5fr 1fr;
+        }
+
+        .model-left {
+            border-radius: 3px;
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-gap: 10px;
+            height: max-content;
+            padding: 10px;
+
+        }
+
+        input {
+            width: 100%;
+        }
+        .button-update{
+            cursor: pointer;
+        }
+        button {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 5px;
+            width: 100%;
+            margin-top: 4px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class=" first-header">
+                <div class="left-aligned">
+                    <div class="button">Home</div>
+                    <div class="button">Boards</div>
+                    <div class="button">Search bar</div>
+                </div>
+                <div class="logo button">
+                    Logo
+                </div>
+                <div class="right-aligned">
+                    <div class="button">Add</div>
+                    <div class="button">Info</div>
+                    <div class="button">Bell</div>
+                    <div class="button">Gear</div>
+                    <div class="button">Avatar</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="second-header">
+                    <div class="left">
+                        <div class="board-header-text">Board Title</div>
+                        <div class="button">Star</div>
+                        <div class="button">Personal</div>
+                        <div class="button">Private</div>
+                    </div>
+                    <div class="right">
+                        <div class="button">Show menu</div>
+                        <div class="button">Butler</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="columm-list" id="columm-list">
+                        <div class="list-title">
+                            List title 1
+                        </div>
+                        <div class="columm-list" id="listCard1">
+                            <div class="card" id="card-todo-1">
+                                <div class="title-name" id="Card-model1" onclick="showModal(1)">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card" id="card-todo-2">
+                                <div class="title-name" id="Card-model2" onclick="showModal(2)">
+                                    Card 2
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput1" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(1)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columm-list">
+                        <div class="list-title">
+                            List title 2
+                        </div>
+                        <div class="columm-list" id="listCard2">
+                            <div class="card" id="card-todo-3">
+                                <div class="title-name" id="Card-model3" onclick="showModal(3)">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card" id="card-todo-4">
+                                <div class="title-name" id="Card-model4" onclick="showModal(4)">
+                                    Card 2
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput2" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(2)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columm-list">
+                        <div class="list-title">
+                            List title 3
+                        </div>
+                        <div class="columm-list" id="listCard3">
+                            <div class="card" id="card-todo-5">
+                                <div class="title-name" id="Card-model5" onclick="showModal(5)">
+                                    Card 1
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card" id="card-todo-6">
+                                <div class="title-name" id="Card-model6" onclick="showModal(6)">
+                                    Card 2
+                                </div>
+                                <div class="button-update">
+                                    <i class="fa fa-pencil" onclick="updateTitleItemCard()" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <input id="myInput3" class="myinput">
+                        <div class="add-card">
+                            <div class="add">
+                                <span onclick="newElement(3)" class="addBtn">+ Add another card</span>
+                            </div>
+                            <div class="add-icon">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- create model -->
+            <div class="modal" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="modal-header">
+                                    <div class="col-sm-10">
+                                        <h5 class="modal-title" id="modalTitle"></h5>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="modal-body" id="bodyModal">
+                                <div class="col-sm-7">
+                                    <p>
+                                    <h5><strong> <i class="fa fa-align-right"></i> Description</strong></h5>
+                                    </p>
+                                    <input id="inputmodal1" class="myinput">
+                                    <p></p>
+                                    <h5><strong> <i class="fa fa-list-ul"></i> Activity</strong></h5>
+                                    </p>
+                                    <input id="inputmodal2" class="myinput">
+                                </div>
+                                <div class="col-sm-5">
+                                    <h5>ADD TO CARD</h5>
+                                    <button> Members</button>
+                                    <button> Labels</button>
+                                    <button> CheckList</button>
+                                    <button> Due Data</button>
+                                    <button> Attachment</button>
+                                    <button> cover</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="modal-footer">
+                                <div>
+                                    <button type="button" onclick="modalDeleteData()" class="btn btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        function newElement(index) {
+            document.getElementById(`myInput${index}`).style.display = "block";
+            var getIputValue = document.getElementById(`myInput${index}`).value;// myInput tên các id có cùng ký tự đầu là myInput .${index} là kí tự cuối khác nhau
+            if (getIputValue == "") {
+                alert("no text, please insert text ")
+            }
+            else {
+                var cardItemId = document.getElementById("listCard1").lastElementChild.id; // get id cua lop cuoi cung
+                var arrId = cardItemId.split('-');
+                // var ItemId = document.getElementById("listCard1").lastElementChild.id; // get id cua lop cuoi cung
+                // var arrId = cardItemId.split('-');
+
+                var titleName = document.createElement("div");
+                titleName.className = "title-name"
+                titleName.innerHTML = getIputValue;
+
+                var btnUpdate = document.createElement("div");
+                btnUpdate.className = "button-update"
+                var buttonUpdate = document.createElement("i");
+                buttonUpdate.setAttribute("onclick", "updateTitleItemCard()")
+                buttonUpdate.className = "fa fa-pencil"
+                buttonUpdate.id = `${arrId[0]}-${arrId[1]}-${cardIndex}`;
+                btnUpdate.appendChild(buttonUpdate);
+
+                var card = document.createElement("div");
+                card.className = "card"
+                cardIndex = Number(arrId[2]) + 1;
+                card.id = `${arrId[0]}-${arrId[1]}-${cardIndex}`;
+                card.appendChild(titleName)
+                card.appendChild(btnUpdate)
+                document.getElementById(`listCard${index}`).appendChild(card);
+                card.setAttribute("onclick", showModal(cardIndex))
+                var nam = "";
+                document.getElementById(`myInput${index}`).value = nam;
+                document.getElementById(`myInput${index}`).style.display = "none";
+            }
+        }
+
+        function showModal(index) {
+
+            document.getElementById(`card-todo-${index}`).setAttribute("data-toggle", "modal");//mở modal khi nhấn vào id có tên với kí tự đầu là Card-model
+            document.getElementById(`card-todo-${index}`).setAttribute("data-target", "#myModal");
+
+            var title = document.getElementById(`card-todo-${index}`).innerText;
+            console.log(title, "?????????")
+            document.getElementById("modalTitle").innerHTML = `${title}`
+            // var body =  document.getElementById("bodyModal").innerText;/// lấy text từ modal
+            // document.getElementById("bodyModal").innerHTML = `${desc} ${body}`;//gán text từ card và cộng text từ modal
+
+        }
+        function updateTitleItemCard(title){
+            var kdojso="";
+            var textTitleCard = document.getElementById(`card-todo-${title}`).innerText
+            document.getElementById('card-todo-${title}').innerHTML = `${kdojso}`
+        }
+
+        // function modalDeleteData(){
+        //     var namatitlemodal = "";
+        //     document.getElementById(`modalTitle`).innerText = namatitlemodal;
+        //     var namatitlemodal = "";
+        //     document.getElementById(`bodyModal`).innerText= namatitlemodal;
+
+        // }
+
+        // function saveTextModal(){
+        //     var tileModal= document.getElementById("modalTitle").innerText;
+        //     if(tileModal==""){
         //         alert("no text, please insert text ")
         //     }
         //     else {
-        //         var titleName = document.createElement("div");
-        //         titleName.className = "title-name"
-        //         titleName.innerHTML = getIputValue;
-        //         var btnUpdate = document.createElement("div");
-        //         btnUpdate.className = "button-update"
-        //         var buttonUpdate = document.createElement("i");
-        //         buttonUpdate.setAttribute("onclick", "updateElement()")
-        //         buttonUpdate.className = "fa fa-pencil"
-        //         btnUpdate.appendChild(buttonUpdate);
-        //         const mycardCount = document.getElementById(`listCard${index}`).childElementCount;
-        //         titleName.setAttribute("onclick", `showModal(${index},${mycardCount +1})`);
-        //         titleName.setAttribute("id", `myLI${myULCount + 1}`);
-        //         var card = document.createElement("div");
-        //         card.className = "card"
-        //         card.id = ""
-        //         card.appendChild(titleName)
-        //         card.appendChild(btnUpdate)
-        //         document.getElementById(`listCard${index}`).appendChild(card);
-        //        // card.setAttribute("onclick", "showModal()")
-        //         var nam = "";
-        //         document.getElementById(`myInput${index}`).value = nam;
-        //         document.getElementById(`myInput${index}`).style.display = "none";
+        //         var titleCard = document.getElementById("Card-model1").innerText;
+        //         document.getElementById("Card-model1").innerHTML=titleCard;
         //     }
+
         // }
 
- 
- 
- 
- 
- 
- addtask = (id) => {
-        const myULCount = document.getElementById(`myUL${id}`).childElementCount;
-        var valueInput = document.getElementById(`tsk${id}`).value
-        var li = document.createElement("li");
-        li.setAttribute("onclick", `showModal(${id},${myULCount +1})`);
-        li.setAttribute("id", `myLI${myULCount + 1}`);
-        li.innerHTML = valueInput;
-        if (valueInput == "") {
-            alert("You must write in box");
-        } else {
-            document.getElementById(`myUL${id}`).appendChild(li);
-            document.getElementById(`tsk${id}`).value = "";
-            document.getElementById(`addTask${id}`).style.display = "none";
-            document.getElementById(`addCardId${id}`).style.display = "block";
-        }
-        }
+    </script>
+</body>
+
+</html>
